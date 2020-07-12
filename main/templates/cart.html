@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!-- favicon -->
+        <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon.ico/apple-icon-57x57.png' %}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon.ico/apple-icon-60x60.png' %}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon.ico/apple-icon-72x72.png' %}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon.ico/apple-icon-76x76.png' %}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon.ico/apple-icon-114x114.png' %}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon.ico/apple-icon-120x120.png' %}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon.ico/apple-icon-144x144.png' %}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon.ico/apple-icon-152x152.png' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon.ico/apple-icon-180x180.png' %}">
+        <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'images/favicon.ico/android-icon-192x192.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon.ico/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon.ico/favicon-96x96.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon.ico/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'images/favicon.ico/manifest.json' %}">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="{% static 'images/favicon.ico/ms-icon-144x144.png' %}">
+        <meta name="theme-color" content="#ffffff">
+        <!-- end favicon -->
+    
+        <title>Cart | Sneaker Shop</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- end Bootstrap -->
+    </head>
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">HOME</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    AIR JORDAN
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for air_jordan in air_jordans %}
+                        <a class="dropdown-item" href="/browse/{{air_jordan.id}}">{{air_jordan.model}}</a>
+                        {% endfor %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/browse/air jordan">Browse Air Jordan</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    NIKE
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for nike in nikes %}
+                        <a class="dropdown-item" href="/browse/{{nike.id}}">{{nike.model}}</a>
+                        {% endfor %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/browse/nike">Browse Nike</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ADIDAS
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for adidas in adidases %}
+                        <a class="dropdown-item" href="/browse/{{adidas.id}}">{{adidas.model}}</a>
+                        {% endfor %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/browse/adidas">Browse Adidas</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/browse" class="nav-link">BROWSE ALL</a>
+                </li>
+            </ul>
+                
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">Cart <img src="{% static 'images/cart.png' %}" height="15vh" alt=""></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="px-4 px-lg-0">
+        <!-- For demo purpose -->
+        <div class="container text-white py-5 text-center">
+            <h1 class="display-4">Your Cart</h1>
+        </div>
+        <!-- End -->
+
+        <div class="messages">
+        {% if messages %}
+            <ul class="messages text-danger">
+                {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+      
+        <div class="pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+        
+                        <!-- Shopping cart table -->
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="p-2 px-3 text-uppercase">Product</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="p-2 px-3 text-uppercase">Color</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Price</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Quantity</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in cart.cart_items.all %}
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="p-2">
+                                                <img src="{{item.shoe.color.image.url}}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                <div class="ml-3 d-inline-block align-middle">
+                                                    <h5 class="mb-0"> <a href="/shoe/{{item.shoe.color.id}}" class="text-dark d-inline-block align-middle">{{item.shoe.color.model.brand.name}} {{item.shoe.color.model.model}}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Size: {{item.shoe.size}}</span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class="align-middle"><strong>{{item.shoe.color.color}}</strong></td>
+                                        <td class="align-middle"><strong>${{item.shoe.color.model.price}}</strong></td>
+                                        <form action='/update_quantity' method='post'>
+                                            {% csrf_token %}
+                                            <td class="align-middle">
+                                                <input type='hidden' name='item_id' value='{{item.id}}'>
+                                                <input type='text' name='new_quantity' size='2' value='{{item.quantity}}'><button class="btn btn-dark btn-sm">Update</button>
+                                            </td>
+                                        </form>
+                                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                            <ul class="list-unstyled mb-4">
+                                <li class="d-flex justify-content-between px-4 py-3 border-bottom">
+                                    <strong class="text-muted">Order Subtotal </strong><strong>${{cart.total}}</strong>
+                                </li>
+                                <li class="d-flex justify-content-between px-4 py-3 border-bottom">
+                                    <strong class="text-muted">Shipping and handling</strong><strong>FREE</strong>
+                                </li>
+                                <li class="d-flex justify-content-between px-4 py-3 border-bottom">
+                                    <strong class="text-muted">Tax</strong><strong>$0.00</strong>
+                                </li>
+                                <li class="d-flex justify-content-between px-4 py-3 border-bottom">
+                                    <strong class="text-muted">Order Total</strong>
+                                    <h5 class="font-weight-bold">${{cart.total}}</h5>
+                                </li>
+                            </ul>
+                            <a href="/checkout" class="btn btn-dark rounded-pill py-2 btn-block">Proceed to checkout</a>
+                        </div>
+                        <!-- End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

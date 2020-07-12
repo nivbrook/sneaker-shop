@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- favicon -->
+        <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon.ico/apple-icon-57x57.png' %}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon.ico/apple-icon-60x60.png' %}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon.ico/apple-icon-72x72.png' %}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon.ico/apple-icon-76x76.png' %}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon.ico/apple-icon-114x114.png' %}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon.ico/apple-icon-120x120.png' %}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon.ico/apple-icon-144x144.png' %}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon.ico/apple-icon-152x152.png' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon.ico/apple-icon-180x180.png' %}">
+        <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'images/favicon.ico/android-icon-192x192.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon.ico/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon.ico/favicon-96x96.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon.ico/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'images/favicon.ico/manifest.json' %}">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="{% static 'images/favicon.ico/ms-icon-144x144.png' %}">
+        <meta name="theme-color" content="#ffffff">
+        <!-- end favicon -->
+
+        <title>Admin Orders | Sneaker Shop</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/orders_page.css' %}">
+
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- end Bootstrap -->
+    </head>
+    <body>
+        <div class="px-0 px-lg-0">
+            <div class="container text-white py-2 text-center">
+                <h1 class="display-4">View Orders</h1>
+            </div>
+
+            <div class="pb-5 px-0">
+                <div class="container px-0">
+                    <small><a href="/admin">Back to Admin Menu</a></small>
+                    <div class="col-lg-12 pt-0 px-0 bg-white rounded shadow-sm mb-5">
+                        <div class="table-responsive px-0">
+                            <div class="container text-dark py-3 px-1 text-center">
+                                <p><h3 class="display-6">All Orders</h3></p>
+                                <table class="table table-sm table-responsive table-striped table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Order</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">User</th>
+                                            <th scope="col">Address</th>
+                                            <th scope="col">City, State Zip</th>
+                                            <th scope="col">Order Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in orders %}
+                                        <tr scope="row">
+                                            <td>#{{order.id}}</td>
+                                            <td>{{order.user.email}}</td>
+                                            <td>{{order.user.first_name}} {{order.user.last_name}}</td>
+                                            <td>{{order.user.address.address}} {{order.user.address.address2}}</td>
+                                            <td>{{order.user.address.city}}, {{order.user.address.state}} {{order.user.address.zipcode}}</td>
+                                            <td>{{order.created_at}}</td>
+                                            <form action="/admin/update_status" method='post'>
+                                                {% csrf_token %}
+                                                <td>{{order.status}} 
+                                                    <select name='status' selected="Shipped">
+                                                        <option value="Processing" {% if order.status == "Processing" %} selected {% endif %}>Processing</option>
+                                                        <option value="Shipped" {% if order.status == "Shipped" %} selected {% endif %}>Shipped</option>
+                                                        <option value="Canceled" {% if order.status == "Canceled" %} selected {% endif %}>Canceled</option>
+                                                    </select>
+                                                    <input type="hidden" name='order_id' value='{{order.id}}'>
+                                                    <button class="btn btn-sm btn-dark">Update</button>
+                                                </td>
+                                            </form>
+                                            <th><a href="/admin/order/{{order.id}}">Click for Details</a></th>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- <h1>View Orders</h1>
+        <table style='width:100%'>
+            <thead>
+                <tr>
+                    <th>Order #</th>
+                    <th>Email</th>
+                    <th>User</th>
+                    <th>Address</th>
+                    <th>City, State Zip</th>
+                    <th>Order Date</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>#{{order.id}}</td>
+                    <td>{{order.user.email}}</td>
+                    <td>{{order.user.first_name}} {{order.user.last_name}}</td>
+                    <td>{{order.user.address.address}} {{order.user.address.address2}}</td>
+                    <td>{{order.user.address.city}}, {{order.user.address.state}} {{order.user.address.zipcode}}</td>
+                    <td>{{order.created_at}}</td>
+                    <form action="/admin/update_status" method='post'>
+                        {% csrf_token %}
+                        <td>{{order.status}} 
+                            <select name='status' selected="Shipped">
+                                <option value="Processing" {% if order.status == "Processing" %} selected {% endif %}>Processing</option>
+                                <option value="Shipped" {% if order.status == "Shipped" %} selected {% endif %}>Shipped</option>
+                                <option value="Canceled" {% if order.status == "Canceled" %} selected {% endif %}>Canceled</option>
+                            </select>
+                            <input type="hidden" name='order_id' value='{{order.id}}'>
+                            <button>Update</button>
+                        </td>
+                    </form>
+                    <th><a href="/admin/order/{{order.id}}">Click for Details</a></th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> -->
+    </body>
+</html>

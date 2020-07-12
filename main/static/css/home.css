@@ -1,0 +1,16 @@
+body {
+    padding-top: 70px;
+}
+
+.jumbotron {
+    background: url('../images/jumbotron.jpg') no-repeat;
+    background-size: cover;
+    padding-left: 15px;
+    height: 110vh;
+    width: 100vw;
+    color: rgb(195, 195, 195);
+}
+
+.card {
+    border: none;
+}

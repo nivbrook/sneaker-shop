@@ -1,0 +1,7 @@
+body {
+    padding-top: 70px;
+    background: #eecda3;
+    background: -webkit-linear-gradient(to right, #d3b997, #ef629f);
+    background: linear-gradient(to right, #000000, #434343);
+    min-height: 100vh;
+}
