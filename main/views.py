@@ -65,7 +65,6 @@ def catalog_page(request, browse_filter = "all"):
         'shoes': display_shoes,
         'all_brands': all_brands,
         'all_models': all_models,
-        'sizes': sizes,
         'category': category,
         'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),
         'nikes': Brand.objects.get(name="Nike").models.all(),
