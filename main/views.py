@@ -314,11 +314,12 @@ def update_status(request):
 def order_details(request, order_id):
     if 'admin' not in request.session:
         return redirect('/admin')
-
+    order = Order.objects.get(id=order_id)
+    cc_expiration_date = order.credit_card.expiration_date.strftime('%m/%y')
     context = {
-        'order': Order.objects.get(id=order_id)
+        'order': order,
+        'cc_expiration_date': cc_expiration_date
     }
-
     return render(request,"order_details.html", context)
 
 def admin_menu(request):

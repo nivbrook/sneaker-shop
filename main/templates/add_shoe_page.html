@@ -69,7 +69,12 @@
                                     {% csrf_token %}
                                     <div class="form-group">
                                         <label>Brand: </label>
-                                        <input type='text' name='brand' class="form-control" value="" required>
+                                        <select name='brand' class="form-control">
+                                            <option value= "Air Jordan">Air Jordan</option>
+                                            <option value="Adidas">Adidas</option>
+                                            <option value="Nike">Nike</option>
+                                        </select>
+                                        <!-- <input type='text' name='brand' class="form-control" value="" required> -->
                                         <div class="invalid-feedback">
                                             Brand is required.
                                         </div>
